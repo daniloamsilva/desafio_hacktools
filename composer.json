@@ -1,0 +1,19 @@
+{
+  "name": "daniloamsilva/desafio_hacktools",
+  "description": "Projeto para o desafio HackTools.",
+  "require" : {
+    "php": ">= 7.0"
+  },
+  "authors": [
+    {
+      "name": "Danilo Augusto Monteiro Silva",
+      "email": "danilo.augmonteiro@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "src\\": "src/",
+      "MF\\": "vendor/MF/"
+    }
+  }
+}
