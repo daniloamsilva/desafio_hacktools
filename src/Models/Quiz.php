@@ -19,7 +19,11 @@ class Quiz extends Model {
   }
 
   public function all() {
-    $query = "SELECT id, title, created_at FROM tb_quizes";
+    $query = "
+      SELECT q.id, q.title, q.created_at, qa.created_at AS answred_at FROM tb_quizes AS q
+      LEFT JOIN tb_quiz_answers AS qa 
+      ON qa.quiz_id = q.id
+    ";
     return $this->db->query($query)->fetchAll();
   }
 
@@ -33,6 +37,11 @@ class Quiz extends Model {
     $stmt->execute();
 
     return $this->db->lastInsertId();
+  }
+
+  public function find($id) {
+    $query = "SELECT id, title, created_at FROM tb_quizes WHERE id = " . $id;
+    return $this->db->query($query)->fetch();
   }
 
 }

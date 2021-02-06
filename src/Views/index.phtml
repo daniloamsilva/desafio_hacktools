@@ -14,7 +14,12 @@
           <?= $quiz['title'] ?>
         </strong>
         <br>
-        <small>Criado: <?= date("d/m/Y", strtotime($quiz['created_at'])) ?></small>
+        <small>Criado em: <?= date("d/m/Y", strtotime($quiz['created_at'])) ?></small>
+        
+        <?php if($quiz['answred_at']) { ?>
+          <small>Respondido em: <?= date("d/m/Y", strtotime($quiz['answred_at'])) ?></small>
+        <?php } ?>
+
       </a>
     </div>
   <?php } ?>

@@ -1,1 +1,46 @@
-<h1>Vizualizando o quiz de ID <?= $this->view->quiz_id ?></h1>
+<h1 class="text-center"><?= $this->view->quiz['title'] ?></h1>
+<hr>
+
+<form action="/update" method="POST">
+  <input type="hidden" name="quiz_id" value="<?= $this->view->quiz['id'] ?>">
+
+  <input type="hidden" name="latitude" id="input_latitude" value="0">
+  <input type="hidden" name="longitude" id="input_longitude" value="0">
+
+  <div class="answers_container my-5">
+    <?php foreach($this->view->questions as $question) { ?>
+      <div class="mb-3">
+        <label for="answer<?= $question['id'] ?>" class="form-label">
+          <?= $question['question_text'] ?>
+        </label>
+        <div class="input-group">
+          <span class="input-group-text">Resposta</span>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="answer<?= $question['id'] ?>" 
+            name="answer_question_<?= $question['id'] ?>"
+            maxlength="255"
+            required
+          >
+        </div>
+      </div>
+    <?php } ?>
+  </div>
+
+  <div class="text-center">
+    <button type="submit" class="btn btn-success">Enviar Respostas</button>
+  </div>
+</form>
+
+<script>
+  const input_latitude = document.getElementById('input_latitude');
+  const input_longitude = document.getElementById('input_longitude');
+    
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        input_latitude.value = position.coords.latitude;
+        input_longitude.value = position.coords.longitude;
+      });
+  }
+</script>

@@ -20,9 +20,14 @@ class QuizController extends Action {
   }
 
   public function show() {
-    $quiz_id = $_GET['id'];
+    $quiz = Container::getModel('Quiz');
+    $question = Container::getModel('Question');
 
-    $this->view->quiz_id = $quiz_id;
+    $current_quiz = $quiz->find($_GET['id']);
+    $questions = $question->getQuizQuestions($current_quiz['id']);
+
+    $this->view->questions = $questions;
+    $this->view->quiz = $current_quiz;
 
     $this->render('show');
   }
@@ -39,6 +44,27 @@ class QuizController extends Action {
       $question->__set('question_text', $question_text);
       $question->__set('quiz_id', $result_id);
       $question->insert();
+    }
+
+    header("Location: /");
+  }
+
+  public function update() {
+    $quiz_answer = Container::getModel('QuizAnswer');
+    $quiz_answer->__set('quiz_id', $_POST['quiz_id']);
+    $quiz_answer->__set('latitude', $_POST['latitude']);
+    $quiz_answer->__set('longitude', $_POST['longitude']);
+    $quiz_answer->__set('created_at', date('Y-m-d'));
+    $result_id = $quiz_answer->insert();
+
+    foreach($_POST as $key => $value) {
+      if(substr($key, 0, 16) == 'answer_question_'){
+        $question_answer = Container::getModel('QuestionAnswer');
+        $question_answer->__set('quiz_answer_id', $result_id);
+        $question_answer->__set('question_id', substr($key, 16));
+        $question_answer->__set('answer', $value);
+        $question_answer->insert();
+      }
     }
 
     header("Location: /");

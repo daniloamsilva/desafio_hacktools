@@ -20,7 +20,7 @@ class Question extends Model {
   public function getQuizQuestions($quiz_id) {
     $query = "
       SELECT id, question_text, quiz_id
-      FROM tb_questions AS
+      FROM tb_questions
       WHERE quiz_id = ". $quiz_id ."
     ";
     return $this->db->query($query)->fetchAll();
