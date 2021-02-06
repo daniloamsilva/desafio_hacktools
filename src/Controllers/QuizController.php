@@ -2,12 +2,13 @@
 namespace src\Controllers;
 
 use MF\Controller\Action;
-use src\Models\Quiz;
+use MF\Model\Container;
 
 class QuizController extends Action {
 
   public function index() {
-    $quiz = new Quiz();
+    $quiz = Container::getModel('Quiz');
+
     $quizes = $quiz->all();
     $this->view->quizes = $quizes;
 
@@ -27,17 +28,20 @@ class QuizController extends Action {
   }
 
   public function store() {
-    $quiz = new Quiz();
+    $quiz = Container::getModel('Quiz');
+    $quiz->__set('title', $_POST['quiz_title']);
+    $quiz->__set('user_id', 1);
+    $quiz->__set('created_at', date('Y-m-d'));
+    $result_id = $quiz->insert();
 
-    $quiz->insert([
-      'title' => $_POST['quiz_title'],
-      'questions' => $_POST['quiz_questions']
-    ]);
+    foreach($_POST['quiz_questions'] as $question_text) {
+      $question = Container::getModel('Question');
+      $question->__set('question_text', $question_text);
+      $question->__set('quiz_id', $result_id);
+      $question->insert();
+    }
 
-    $quizes = $quiz->all();
-    $this->view->quizes = $quizes;
-
-    $this->render('index');
+    header("Location: /");
   }
 
 }
