@@ -11,7 +11,7 @@ abstract class Action {
 
   protected function render($view) {
     $this->view->page = $view;
-    require_once "../src/Views/layout/layout.phtml";
+    require_once "../src/Views/layout.phtml";
   }
 
   protected function content() {
@@ -19,7 +19,7 @@ abstract class Action {
     $current_class = str_replace('src\\Controllers\\', '', $current_class);
     $current_class = strtolower(str_replace('Controller', '', $current_class));
 
-    require_once "../src/Views/". $current_class ."/". $this->view->page .".phtml";
+    require_once "../src/Views/". $this->view->page .".phtml";
   }
 
 }
