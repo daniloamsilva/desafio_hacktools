@@ -25,6 +25,12 @@ class Route extends Bootstrap {
       'action' => 'show'
     );
 
+    $routes['store'] = array(
+      'route' => '/store',
+      'controller' => 'QuizController',
+      'action' => 'store'
+    );
+
     $this->setRoutes($routes);
   }
 

@@ -1,1 +1,84 @@
-<h1>Criar questionário</h1>
+<h1 class="text-center">Novo questionário</h1>
+
+<form class="m-sm-3 m-lg-5" action="/store" method="POST">
+  <div class="input-group mb-3">
+    <span class="input-group-text">Título</span>
+    <input 
+      type="text" 
+      class="form-control" 
+      name="quiz_title" 
+      placeholder="Digite um título ..."
+      maxlength="255"
+    >
+  </div>
+
+  <div id="question_container" class="mt-4">
+    <hr>
+    <h3 class="text-center mb-3">Questões</h3>
+
+    <div id="question_1" class="input-group mb-3">
+      <span class="input-group-text">Enunciado</span>
+      <input 
+        type="text" 
+        class="form-control"
+        name="quiz_questions[]" 
+        placeholder="Digite o enunciado ..."
+        maxlength="255"
+      >
+    </div>
+  </div>
+
+  <div class="col-12 d-grid gap-2">
+    <button 
+      type="button" 
+      class="btn btn-outline-info p-2 d-flex justify-content-center align-items-center"
+      id="new_question_button"
+    >
+      <i class="fas fa-plus"></i>
+      <strong>Nova questão</strong>
+    </button>
+  </div>
+
+  <div class="col-12 d-grid gap-2">
+    <hr>
+    <button 
+      type="submit" 
+      class="btn btn-info p-2 d-flex justify-content-center align-items-center"
+    >
+      <i class="fas fa-save"></i>
+      <strong>Salvar</strong>
+    </button>
+  </div>
+</form>
+
+<script>
+  window.onload = () => {
+    
+    let number_questions = 1;
+
+    const first_input_question = document.getElementById('question_1');
+    const question_container = document.getElementById('question_container');
+
+    const delete_question_button = document.createElement('button');
+    delete_question_button.classList.add("btn", "btn-outline-danger");
+    delete_question_button.setAttribute("type", "button");
+    delete_question_button.innerHTML = "<i class='fas fa-trash-alt'></i>";
+
+    document.getElementById('new_question_button').addEventListener('click', () => addQuestionInput(number_questions + 1));
+
+    function addQuestionInput(sequence) {
+      const new_input_question = first_input_question.cloneNode(true);
+      const new_delete_question_button = delete_question_button.cloneNode(true);
+
+      new_delete_question_button.addEventListener('click', (e) => new_input_question.remove());
+      new_input_question.id = 'question_' + sequence;
+      new_input_question.getElementsByTagName('input')[0].value = "";
+
+      new_input_question.appendChild(new_delete_question_button);
+      question_container.appendChild(new_input_question);
+
+      number_questions++;
+    }
+
+  }
+</script>

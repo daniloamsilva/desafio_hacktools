@@ -26,4 +26,18 @@ class QuizController extends Action {
     $this->render('show');
   }
 
+  public function store() {
+    $quiz = new Quiz();
+
+    $quiz->insert([
+      'title' => $_POST['quiz_title'],
+      'questions' => $_POST['quiz_questions']
+    ]);
+
+    $quizes = $quiz->all();
+    $this->view->quizes = $quizes;
+
+    $this->render('index');
+  }
+
 }
