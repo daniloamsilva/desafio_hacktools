@@ -40,7 +40,11 @@ class Quiz extends Model {
   }
 
   public function find($id) {
-    $query = "SELECT id, title, created_at FROM tb_quizes WHERE id = " . $id;
+    $query = "
+      SELECT q.id, q.title, q.created_at, qa.created_at FROM tb_quizes AS q 
+      LEFT JOIN tb_quiz_answers AS qa ON q.id = qa.quiz_id
+      WHERE q.id = " . $id;
+
     return $this->db->query($query)->fetch();
   }
 

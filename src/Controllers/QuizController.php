@@ -3,6 +3,7 @@ namespace src\Controllers;
 
 use MF\Controller\Action;
 use MF\Model\Container;
+use src\Models\QuestionAnswer;
 
 class QuizController extends Action {
 
@@ -21,15 +22,31 @@ class QuizController extends Action {
 
   public function show() {
     $quiz = Container::getModel('Quiz');
-    $question = Container::getModel('Question');
 
     $current_quiz = $quiz->find($_GET['id']);
-    $questions = $question->getQuizQuestions($current_quiz['id']);
+    
+    if($current_quiz['created_at']) {
+      $quiz_answer = Container::getModel('QuizAnswer');
+      $question_answer = Container::getModel('QuestionAnswer');
 
-    $this->view->questions = $questions;
-    $this->view->quiz = $current_quiz;
+      $current_quiz_answer = $quiz_answer->find($current_quiz['id']);
+      $answers = $question_answer->getQuizAnswers($current_quiz_answer['id']);
 
-    $this->render('show');
+      $this->view->quiz = $current_quiz;
+      $this->view->answers = $answers;
+
+      $this->render('show_answers');
+    }
+    else {
+      $question = Container::getModel('Question');
+      $questions = $question->getQuizQuestions($current_quiz['id']);
+  
+      $this->view->quiz = $current_quiz;
+      $this->view->questions = $questions;
+  
+      $this->render('show');
+    }
+
   }
 
   public function store() {

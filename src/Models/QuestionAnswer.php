@@ -34,8 +34,11 @@ class QuestionAnswer extends Model {
   }
 
   public function getQuizAnswers($quiz_answer_id) {
-    $query = "SELECT id, quiz_answer_id, question_id, answer FROM tb_question_answers WHERE quiz_answer_id = " . $quiz_answer_id;
-    return $this->db->query($query)->fetch();
+    $query = "
+      SELECT q.question_text, qa.answer FROM tb_question_answers AS qa
+      LEFT JOIN tb_questions AS q ON qa.question_id = q.id
+      WHERE qa.quiz_answer_id = " . $quiz_answer_id;
+    return $this->db->query($query)->fetchAll();
   }
 
 }

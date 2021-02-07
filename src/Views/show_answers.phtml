@@ -1,0 +1,11 @@
+<h1 class="text-center"><?= $this->view->quiz['title'] ?></h1>
+<hr>
+
+<div class="answers_container my-5">
+  <?php foreach($this->view->answers as $answer) { ?>
+    <div class="mb-3">
+      <h4><?= $answer['question_text'] ?></h4>
+      <p><?= $answer['answer'] ?></p>
+    </div>
+  <?php } ?>
+</div>
