@@ -5,20 +5,6 @@ use MF\Model\Model;
 
 class QuizAnswer extends Model {
 
-  private $id;
-  private $quiz_id;
-  private $latitude;
-  private $longitude;
-  private $created_at;
-
-  public function __get($attr){
-    return $this->$attr;
-  }
-
-  public function __set($attr, $value){
-    $this->$attr = $value;
-  }
-
   public function insert() {
     $query = "
       INSERT INTO tb_quiz_answers(quiz_id, latitude, longitude, created_at) 

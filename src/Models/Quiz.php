@@ -5,19 +5,6 @@ use MF\Model\Model;
 
 class Quiz extends Model {
 
-  private $id;
-  private $title;
-  private $user_id;
-  private $created_at;
-
-  public function __get($attr){
-    return $this->$attr;
-  }
-
-  public function __set($attr, $value){
-    $this->$attr = $value;
-  }
-
   public function all() {
     $query = "
       SELECT q.id, q.title, q.created_at, qa.created_at AS answred_at FROM tb_quizes AS q

@@ -1,8 +1,6 @@
 <?php
 namespace src;
 
-use PDOException;
-
 class Connection {
 
   public static function getDb() {

@@ -5,19 +5,6 @@ use MF\Model\Model;
 
 class QuestionAnswer extends Model {
 
-  private $id;
-  private $quiz_answer_id;
-  private $question_id;
-  private $answer;
-
-  public function __get($attr){
-    return $this->$attr;
-  }
-
-  public function __set($attr, $value){
-    $this->$attr = $value;
-  }
-
   public function insert() {
     $query = "
       INSERT INTO tb_question_answers(quiz_answer_id, question_id, answer) 

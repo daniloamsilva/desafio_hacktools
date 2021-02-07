@@ -5,18 +5,6 @@ use MF\Model\Model;
 
 class Question extends Model {
 
-  private $id;
-  private $question_text;
-  private $quiz_id;
-
-  public function __get($attr){
-    return $this->$attr;
-  }
-
-  public function __set($attr, $value){
-    $this->$attr = $value;
-  }
-
   public function getQuizQuestions($quiz_id) {
     $query = "
       SELECT id, question_text, quiz_id
