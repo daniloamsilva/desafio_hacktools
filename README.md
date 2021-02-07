@@ -23,8 +23,11 @@ Observações:
 - Resposta: Resposta, Data de cadastro, Localização Atual - LAT e LONG
 
 ## Desenvolvimento
-Seguindo a recomendação do desafio, dicidi não utlizar frameworks para o projeto. <br>
-Desenvolvi utilzando a arquitetura MVC com as linguagens PHP, HTML, CSS e Javascript. <br>
+- Seguindo a recomendação do desafio, dicidi não utlizar frameworks para o projeto.
+- Desenvolvi utilizando a arquitetura MVC com as linguagens PHP, HTML, CSS e Javascript.
+- Optei por utilizar uma conexão com um banco de dados MySQL para persistência dos dados.
+- Utilizei o biblioteca Bootstrap para me auxiliar com a estilização e responsividade.
+- Para os ícones, foi retirado do Font Awesome
 
 ## Testando o projeto
 - Primeiro importe o arquivo **desafio_hacktools.sql** para configurar o banco de dados MySQL
