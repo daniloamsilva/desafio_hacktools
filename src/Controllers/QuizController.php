@@ -33,6 +33,7 @@ class QuizController extends Action {
       $answers = $question_answer->getQuizAnswers($current_quiz_answer['id']);
 
       $this->view->quiz = $current_quiz;
+      $this->view->quiz_answer = $current_quiz_answer;
       $this->view->answers = $answers;
 
       $this->render('show_answers');

@@ -1,5 +1,21 @@
-<h1 class="text-center"><?= $this->view->quiz['title'] ?></h1>
+<h1 class="text-center d-flex justify-content-between">
+  <a href="/"><i class="fas fa-caret-left text-dark"></i></a>
+  <span><?= $this->view->quiz['title'] ?></span>
+  <div></div>
+</h1>
 <hr>
+
+<div class="text-center">
+  <span>
+    <strong>Latitude:</strong>
+    <?= $this->view->quiz_answer['latitude'] ?>
+  </span>
+  <br>
+  <span>
+    <strong>Longitude:</strong>
+    <?= $this->view->quiz_answer['longitude'] ?>
+  </span>
+</div>
 
 <div class="answers_container my-5">
   <?php foreach($this->view->answers as $answer) { ?>
